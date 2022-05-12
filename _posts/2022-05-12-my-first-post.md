@@ -79,7 +79,7 @@ git clone git://github.com/robbyrussell/oh-my-zsh.git  # 从github上把oh-my-zs
 cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
 ```
 
-## 更新系统应用 及 安装必须的应用
+## 更新系统应用及安装必须的应用
 ```
 sudo yum -y update 
 sudo yum groupinstall -y development # 安装必要的开发工具
@@ -125,7 +125,7 @@ sudo ln -s /usr/local/lib/libpcre.so.1 /lib
 ```
 
 ## 配置Nginx
-### 配置该目录下的nginx.conf文件
+### 配置的nginx.conf文件
 ```
 cd /usr/local/nginx/conf  #
 sudo vim nginx.conf
@@ -192,7 +192,7 @@ http {
     include vhost/*.conf;
 }
 ```
-### 新建一个文件夹 来存放 server的配置文件 以便 不同server存放到不同文件中，再导入到`nginx.conf`中，到这里就差不多算是完成了配置 
+新建一个文件夹 来存放 server的配置文件 以便 不同server存放到不同文件中，再导入到`nginx.conf`中，到这里就差不多算是完成了配置 
 ```
 sudo mkdir vhost  
 sudo vim vhost/web.conf
@@ -264,7 +264,7 @@ sudo rpm -ivh https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.
 ```
 sudo yum repolist all | grep mysql | grep enabled
 ```
-### 如果展示像下面,则表示成功添加仓库:
+ 如果展示像下面,则表示成功添加仓库:
 ```
 mysql-connectors-community/x86_64  MySQL Connectors Community    enabled:     51
 mysql-tools-community/x86_64       MySQL Tools Community         enabled:     63
@@ -289,20 +289,21 @@ sudo systemctl status mysqld
 ````
 #### Mysql的安全设置
 
-#### CentOS上的root默认密码可以在文件/var/log/mysqld.log找到，通过下面命令可以打印出来
+ CentOS上的root默认密码可以在文件/var/log/mysqld.log找到，通过下面命令可以打印出来
 ```
 cat /var/log/mysqld.log | grep -i 'temporary password'
 ```
-#### 执行下面命令进行安全设置，这个命令会进行设置root密码设置，移除匿名用户，禁止root用户远程连接等
+ 执行下面命令进行安全设置，这个命令会进行设置root密码设置，移除匿名用户，禁止root用户远程连接等
 ```
 mysql_secure_installation
 ```
 ### 设置数据库编码为utf8
-#### 打开配置文件
+
+打开配置文件
 ```
 sudo vim /etc/my.cnf
 ```
-#### 在[mysqld]，[client]，[mysql]节点下添加编码设置
+在[mysqld]，[client]，[mysql]节点下添加编码设置
 ```
 [client]
 default-character-set=utf8
@@ -326,7 +327,7 @@ cd ~
 mkdir ruby
 cd ruby     
 ```
-### 克隆项目并命名为对应的名字，看你配置文件(/usr/local/nginx/conf/vhost/web.conf)，其实应该先执行这部分再去创建配置文件
+克隆项目并命名为对应的名字，看你配置文件(/usr/local/nginx/conf/vhost/web.conf)，其实应该先执行这部分再去创建配置文件
 ```
 git clone XXXXXXXX web  
 cd /usr/local/nginx/conf/vhost
