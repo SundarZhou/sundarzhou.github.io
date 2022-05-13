@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "jsDelivr Cache"
+title: "jsdelivr 缓存刷新方法"
 date: 2022-05-13 18:06:57 +0800
 categories: jsDelivr CDN
 ---
