@@ -89,6 +89,14 @@
     } ,
   
     {
+      "title"    : "Github Page自动部署报错",
+      "category" : "jsDelivr",
+      
+      "url"      : "/2022/05/14/build-and-deploy-error/",
+      "keywords" : ""
+    } ,
+  
+    {
       "title"    : "JSON",
       "category" : "",
       

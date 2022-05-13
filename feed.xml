@@ -1,4 +1,66 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2022-05-14T00:11:31+08:00</updated><id>/feed.xml</id><title type="html">Sundar</title><subtitle>Sundar的个人博客</subtitle><author><name>Sundar Zhou</name></author><entry><title type="html">jsdelivr 缓存刷新方法</title><link href="/2022/05/13/jsdelivr-cache/" rel="alternate" type="text/html" title="jsdelivr 缓存刷新方法" /><published>2022-05-13T18:06:57+08:00</published><updated>2022-05-13T18:06:57+08:00</updated><id>/2022/05/13/jsdelivr-cache</id><content type="html" xml:base="/2022/05/13/jsdelivr-cache/">&lt;p&gt;简介：jsDelivr 是一个免费、开源的加速CDN公共服务。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2022-05-14T00:54:06+08:00</updated><id>/feed.xml</id><title type="html">Sundar</title><subtitle>Sundar的个人博客</subtitle><author><name>Sundar Zhou</name></author><entry><title type="html">Github Page自动部署报错</title><link href="/2022/05/14/build-and-deploy-error/" rel="alternate" type="text/html" title="Github Page自动部署报错" /><published>2022-05-14T00:28:18+08:00</published><updated>2022-05-14T00:28:18+08:00</updated><id>/2022/05/14/build-and-deploy-error</id><content type="html" xml:base="/2022/05/14/build-and-deploy-error/">&lt;p&gt;突然发现每次部署的时候都会卡在 build-and-deploy 报错误：
+&lt;img src=&quot;/images/blog/build-and-deploy-error.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;各种Google无关，但是看报错信息发现是这个脚本造成的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.github/workflows/ci.yml&lt;/code&gt;
+看了下作者的源码发现需要配置github完成 jsDelivr的JSON 资源加速&lt;/p&gt;
+
+&lt;p&gt;步骤如下：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;在 GitHub 新建一个 Personal access Token：&lt;/p&gt;
+
+    &lt;p&gt;Settings –&amp;gt; Developer settings –&amp;gt; Personal access tokens –&amp;gt; Generate new token –&amp;gt; 填写 note，勾选 public_repo，生成之后复制 token 值备用。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在博客源码仓库的 Settings –&amp;gt; Secrets –&amp;gt; Actions –&amp;gt; New repository secret，Name 填 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ACCESS_TOKEN&lt;/code&gt;，Value 填第 1 步里复制的 token 值；&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;.github/workflows/ci.yml 的内容如下，不需要修改：&lt;/p&gt;
+
+    &lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Build and Deploy&lt;/span&gt;
+
+ &lt;span class=&quot;na&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+   &lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;branches&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;master&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt;
+
+ &lt;span class=&quot;na&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+   &lt;span class=&quot;na&quot;&gt;build-and-deploy&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ubuntu-latest&lt;/span&gt;
+     &lt;span class=&quot;na&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+       &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Checkout&lt;/span&gt;
+         &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/checkout@v2.3.1&lt;/span&gt;
+         &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+           &lt;span class=&quot;na&quot;&gt;persist-credentials&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;false&lt;/span&gt;
+
+       &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Set Ruby &lt;/span&gt;&lt;span class=&quot;m&quot;&gt;2.7&lt;/span&gt;
+         &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;actions/setup-ruby@v1&lt;/span&gt;
+         &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+           &lt;span class=&quot;na&quot;&gt;ruby-version&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2.7&lt;/span&gt;
+
+       &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Install and Build&lt;/span&gt;
+         &lt;span class=&quot;na&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;|&lt;/span&gt;
+           &lt;span class=&quot;s&quot;&gt;gem install bundler&lt;/span&gt;
+           &lt;span class=&quot;s&quot;&gt;bundle install&lt;/span&gt;
+           &lt;span class=&quot;s&quot;&gt;bundle exec jekyll build&lt;/span&gt;
+
+       &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Deploy&lt;/span&gt;
+         &lt;span class=&quot;na&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;JamesIves/github-pages-deploy-action@3.6.2&lt;/span&gt;
+         &lt;span class=&quot;na&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+           &lt;span class=&quot;na&quot;&gt;ACCESS_TOKEN&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;$&lt;/span&gt;
+           &lt;span class=&quot;na&quot;&gt;BRANCH&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;built&lt;/span&gt;
+           &lt;span class=&quot;na&quot;&gt;FOLDER&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;_site&lt;/span&gt;
+           &lt;span class=&quot;na&quot;&gt;CLEAN&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;    &lt;/div&gt;
+
+    &lt;p&gt;大意就是在向 master 分支 push 代码时，自动执行 checkout、初始化 ruby 环境、安装 Jekyll 并编译博客源码的工作，最后将编译生成的 _site 目录里的内容推送到 built 分支。对 GitHub Actions 感兴趣的同学可以自行参考官方说明学习。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;参考文章：&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mazhuang.org/2020/05/01/cdn-for-github-pages/&quot;&gt;使用 jsDelivr 免费加速 GitHub Pages 博客的静态资源&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><author><name>Sundar Zhou</name></author><category term="jsDelivr" /><category term="GithubPages" /><summary type="html">突然发现每次部署的时候都会卡在 build-and-deploy 报错误：</summary></entry><entry><title type="html">jsdelivr 缓存刷新方法</title><link href="/2022/05/13/jsdelivr-cache/" rel="alternate" type="text/html" title="jsdelivr 缓存刷新方法" /><published>2022-05-13T18:06:57+08:00</published><updated>2022-05-13T18:06:57+08:00</updated><id>/2022/05/13/jsdelivr-cache</id><content type="html" xml:base="/2022/05/13/jsdelivr-cache/">&lt;p&gt;简介：jsDelivr 是一个免费、开源的加速CDN公共服务。&lt;/p&gt;
 
 &lt;h2 id=&quot;jsdelivr-缓存刷新方法&quot;&gt;jsdelivr 缓存刷新方法&lt;/h2&gt;
 &lt;p&gt;只需要将链接中的cdn 更改为 purge，访问一下，后面就会刷新，如果没有更新就多刷新几次&lt;/p&gt;
