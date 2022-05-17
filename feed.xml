@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2022-05-14T00:54:06+08:00</updated><id>/feed.xml</id><title type="html">Sundar</title><subtitle>Sundar的个人博客</subtitle><author><name>Sundar Zhou</name></author><entry><title type="html">Github Page自动部署报错</title><link href="/2022/05/14/build-and-deploy-error/" rel="alternate" type="text/html" title="Github Page自动部署报错" /><published>2022-05-14T00:28:18+08:00</published><updated>2022-05-14T00:28:18+08:00</updated><id>/2022/05/14/build-and-deploy-error</id><content type="html" xml:base="/2022/05/14/build-and-deploy-error/">&lt;p&gt;突然发现每次部署的时候都会卡在 build-and-deploy 报错误：
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="/feed.xml" rel="self" type="application/atom+xml" /><link href="/" rel="alternate" type="text/html" /><updated>2022-05-17T21:51:52+08:00</updated><id>/feed.xml</id><title type="html">Sundar</title><subtitle>Sundar的个人博客</subtitle><author><name>Sundar Zhou</name></author><entry><title type="html">[Rails] with_indifferent_access 使用</title><link href="/2022/05/17/rails-with_indifferent_access/" rel="alternate" type="text/html" title="[Rails] with_indifferent_access 使用" /><published>2022-05-17T21:40:48+08:00</published><updated>2022-05-17T21:40:48+08:00</updated><id>/2022/05/17/rails-with_indifferent_access</id><content type="html" xml:base="/2022/05/17/rails-with_indifferent_access/">&lt;p&gt;今天发现了一个&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;ActiveSupport::HashWithIndifferentAccess&lt;/code&gt;类里的一个方法&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;with_indifferent_access&lt;/code&gt;,
+&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;with_indifferent_access&lt;/code&gt;方法允许将hash同时使用string和symbol的方式操作hash key。&lt;/p&gt;
+&lt;h2 id=&quot;使用场景&quot;&gt;使用场景&lt;/h2&gt;
+&lt;p&gt;当访问一个 hash 时，如果其中的元素使用了String形式的 key，而我们使用 Symbol 形式的 key进行调用，就会无法取到值&lt;/p&gt;
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;hash = { 'type' =&amp;gt; 'mobile' }
+hash['type'] =&amp;gt; &quot;mobile&quot;
+# 用符号key会返回 nil
+hash[:type] =&amp;gt; nil
+
+# hash 调用 with_indifferent_access 时就可以同时使用两种类型的key了
+new_hash = { 'type' =&amp;gt; 'Web', :language =&amp;gt; 'Ruby' }
+new_hash[:type] =&amp;gt; &quot;web&quot;
+new_hash[&quot;type&quot;] =&amp;gt; &quot;web&quot;
+new_hash[:language] =&amp;gt; &quot;web&quot;
+new_hash[&quot;language&quot;] =&amp;gt; &quot;web&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>Sundar Zhou</name></author><category term="Rails" /><summary type="html">今天发现了一个ActiveSupport::HashWithIndifferentAccess类里的一个方法with_indifferent_access, with_indifferent_access方法允许将hash同时使用string和symbol的方式操作hash key。 使用场景 当访问一个 hash 时，如果其中的元素使用了String形式的 key，而我们使用 Symbol 形式的 key进行调用，就会无法取到值 ``` hash = { ‘type’ =&amp;gt; ‘mobile’ } hash[‘type’] =&amp;gt; “mobile” 用符号key会返回 nil hash[:type] =&amp;gt; nil</summary></entry><entry><title type="html">Github Page自动部署报错</title><link href="/2022/05/14/build-and-deploy-error/" rel="alternate" type="text/html" title="Github Page自动部署报错" /><published>2022-05-14T00:28:18+08:00</published><updated>2022-05-14T00:28:18+08:00</updated><id>/2022/05/14/build-and-deploy-error</id><content type="html" xml:base="/2022/05/14/build-and-deploy-error/">&lt;p&gt;突然发现每次部署的时候都会卡在 build-and-deploy 报错误：
 &lt;img src=&quot;/images/blog/build-and-deploy-error.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;各种Google无关，但是看报错信息发现是这个脚本造成的 &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;.github/workflows/ci.yml&lt;/code&gt;
