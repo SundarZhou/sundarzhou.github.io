@@ -113,6 +113,14 @@
     } ,
   
     {
+      "title"    : "我的第一个 JAVA 程序",
+      "category" : "Java",
+      
+      "url"      : "/2022/05/24/hello-java/",
+      "keywords" : ""
+    } ,
+  
+    {
       "title"    : "JSON",
       "category" : "",
       
