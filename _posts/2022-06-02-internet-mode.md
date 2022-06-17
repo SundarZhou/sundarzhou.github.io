@@ -2,7 +2,7 @@
 layout: post
 title: "为什么互联网大厂一边大规模裁员，又一边招聘？"
 date: 2022-06-02 10:38:29 +0800
-categories:
+categories: Confusion
 ---
 真实在大厂工作过，十几年的互联网老兵告诉你事实，
 
