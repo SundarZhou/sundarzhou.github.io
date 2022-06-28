@@ -137,6 +137,14 @@
     } ,
   
     {
+      "title"    : "Hello Rust",
+      "category" : "Rust",
+      
+      "url"      : "/2022/06/29/hello-rust/",
+      "keywords" : ""
+    } ,
+  
+    {
       "title"    : "JSON",
       "category" : "",
       
