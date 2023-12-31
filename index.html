@@ -643,7 +643,7 @@
 			state: {
 				// will be unpaused in init()
 				paused: true,
-				soundEnabled: false,
+				soundEnabled: true,
 				menuOpen: false,
 				openHelpTopic: null,
 				fullscreen: isFullscreen(),
@@ -930,6 +930,7 @@
 
 		// Remove fullscreen control if not supported.
 		if (!fullscreenEnabled()) {
+      console.log(" Remove fullscreen control if not supported.")
 			appNodes.fullscreenFormOption.classList.add('remove');
 		}
 
@@ -1327,6 +1328,33 @@
 		const shellNames = Object.keys(shellTypes);
 
 		function init() {
+      // Remove loading state
+			// while(true){
+			// 	console.log("xx")
+			// }
+
+			// while(true){
+			// 	updateClock();
+			// }
+			// 设置目标日期和时间
+			// var targetDate = new Date('December 31, 2023 23:59:59');
+      var targetDate = new Date('December 31, 2023 16:59:59');
+
+			// 设置每秒钟检查一次时间
+			var interval = setInterval(function() {
+				// 获取当前日期和时间
+				var currentDate = new Date();
+
+				// 检查当前时间是否已经超过目标时间
+        console.log(currentDate >= targetDate)
+				if (currentDate >= targetDate) {
+					// 执行移除块的操作
+					document.querySelector('.loading-init').remove();
+					appNodes.stageContainer.classList.remove('remove');
+
+					clearInterval(interval);
+				}
+			}, 1000); // 每秒钟检查一次时间
 			// Populate dropdowns
 			function setOptionsForSelect(node, options) {
 				node.innerHTML = options.reduce((acc, opt) => acc += `<option value="${opt.value}">${opt.label}</option>`, '');
@@ -1368,32 +1396,6 @@
 
 			// Apply initial config
 			configDidUpdate();
-			// Remove loading state
-			// while(true){
-			// 	console.log("xx")
-			// }
-
-			// while(true){
-			// 	updateClock();
-			// }
-			// 设置目标日期和时间
-			var targetDate = new Date('December 31, 2023 23:59:59');
-
-			// 设置每秒钟检查一次时间
-			var interval = setInterval(function() {
-				// 获取当前日期和时间
-				var currentDate = new Date();
-
-				// 检查当前时间是否已经超过目标时间
-				if (currentDate >= targetDate) {
-					// 执行移除块的操作
-					document.querySelector('.loading-init').remove();
-					appNodes.stageContainer.classList.remove('remove');
-					clearInterval(interval);
-
-				}
-			}, 1000); // 每秒钟检查一次时间
-
 		}
 
 
@@ -1671,7 +1673,7 @@
 		function handlePointerStart(event) {
 			activePointerCount++;
 			const btnSize = 50;
-
+      console.log("handlePointerStart")
 			if (event.y < btnSize) {
 				if (event.x < btnSize) {
 					togglePause();
@@ -1729,7 +1731,6 @@
 		mainStage.addEventListener('pointerend', handlePointerEnd);
 		mainStage.addEventListener('pointermove', handlePointerMove);
 		window.addEventListener('keydown', handleKeydown);
-
 
 		// Account for window resize and custom scale changes.
 		function handleResize() {
