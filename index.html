@@ -643,7 +643,7 @@
 			state: {
 				// will be unpaused in init()
 				paused: true,
-				soundEnabled: true,
+				soundEnabled: false,
 				menuOpen: false,
 				openHelpTopic: null,
 				fullscreen: isFullscreen(),
@@ -1337,8 +1337,7 @@
 			// 	updateClock();
 			// }
 			// 设置目标日期和时间
-			// var targetDate = new Date('December 31, 2023 23:59:59');
-      var targetDate = new Date('December 31, 2023 16:59:59');
+			var targetDate = new Date('December 31, 2023 23:59:59');
 
 			// 设置每秒钟检查一次时间
 			var interval = setInterval(function() {
